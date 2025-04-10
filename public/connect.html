@@ -22,8 +22,6 @@ Phantom</button>
             const publicKey = resp.publicKey.toString();
 
             status.innerText = "Connected wallet: " + publicKey;
-
-            // Tu peux ici faire un fetch vers le backend si besoin
           } catch (err) {
             status.innerText = "Connection failed: " + err.message;
           }
@@ -35,4 +33,5 @@ it.";
     </script>
   </body>
 </html>
+
 
