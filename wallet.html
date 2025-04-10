@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Connect your Wallet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Connect your Wallet</h2>
+  <p>Please enter your Solana wallet address to link it with your Telegram 
+account.</p>
+
+  <input type="text" id="walletInput" placeholder="Your Solana Wallet">
+  <button onclick="submitWallet()">Link Wallet</button>
+
+  <p id="response"></p>
+
+  <script>
+    async function submitWallet() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session_id');
+      const wallet = document.getElementById('walletInput').value;
+
+      if (!sessionId || !wallet) {
+        document.getElementById('response').innerText = "Missing session 
+ID or wallet address.";
+        return;
+      }
+
+      const res = await 
+fetch("https://passworld-backend.onrender.com/link_wallet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ session_id: sessionId, wallet: wallet })
+      });
+
+      const data = await res.json();
+      document.getElementById('response').innerText = data.message || 
+"Linking failed.";
+    }
+  </script>
+</body>
+</html>
+
