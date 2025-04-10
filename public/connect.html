@@ -23,14 +23,7 @@ Phantom</button>
 
             status.innerText = "Connected wallet: " + publicKey;
 
-            // Tu peux ici faire un fetch() POST vers ton backend pour lui 
-envoyer publicKey
-            // fetch("/api/connect", {
-            //   method: "POST",
-            //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify({ wallet: publicKey })
-            // });
-
+            // Tu peux ici faire un fetch vers le backend si besoin
           } catch (err) {
             status.innerText = "Connection failed: " + err.message;
           }
