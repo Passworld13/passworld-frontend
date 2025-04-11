@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Connect Wallet</title>
-    <script 
-src="https://cdn.jsdelivr.net/npm/@solana/web3.js@latest/lib/index.iife.js"></script>
-  </head>
-  <body style="font-family: Arial, sans-serif; padding: 20px;">
-    <h2>Connect Your Wallet</h2>
-    <button onclick="connectWallet()" style="padding: 10px 20px;">Connect 
-Phantom</button>
-    <p id="status" style="margin-top: 20px;"></p>
+<head>
+  <meta charset="UTF-8" />
+  <title>Connect Wallet</title>
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+  <h2>Connect Your Wallet</h2>
+  <button id="connectBtn" style="padding: 10px 20px;">Connect Phantom</button>
+  <p id="status" style="margin-top: 20px;"></p>
 
-    <script>
-      async function connectWallet() {
-        const status = document.getElementById("status");
+  <script>
+    const connectBtn = document.getElementById("connectBtn");
+    const status = document.getElementById("status");
 
-        if (window.solana && window.solana.isPhantom) {
-          try {
-            const resp = await window.solana.connect();
-            const publicKey = resp.publicKey.toString();
-            status.innerText = "Connected wallet: " + publicKey;
-          } catch (err) {
-            status.innerText = "Connection failed: " + err.message;
-          }
-        } else {
-          status.innerText = "Phantom Wallet not detected. Please install 
-it.";
+    connectBtn.addEventListener("click", async () => {
+      if (window.solana && window.solana.isPhantom) {
+        try {
+          const resp = await window.solana.connect();
+          const publicKey = resp.publicKey.toString();
+          console.log("✅ Connected:", publicKey);
+          status.innerText = "✅ Connected wallet: " + publicKey;
+        } catch (err) {
+          console.error("❌ Error:", err);
+          status.innerText = "❌ Connection failed: " + err.message;
         }
+      } else {
+        status.innerText = "❌ Phantom Wallet not detected. Please install it.";
+        window.open("https://phantom.app/", "_blank");
       }
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
-
-
