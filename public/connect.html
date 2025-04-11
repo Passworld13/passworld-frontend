@@ -20,7 +20,6 @@ Phantom</button>
           try {
             const resp = await window.solana.connect();
             const publicKey = resp.publicKey.toString();
-
             status.innerText = "Connected wallet: " + publicKey;
           } catch (err) {
             status.innerText = "Connection failed: " + err.message;
